@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>暦しるべ｜日本の吉日・凶日がひと目で分かる暦カレンダー</title>
+<meta name="description" content="天赦日・一粒万倍日・大安・不成就日など、日本の主要な吉日・凶日20種を月間カレンダーで確認できる無料Webサービス「暦しるべ」の公式サイト。入籍・財布の新調・開業など、大切な日取り選びをお手伝いします。" />
+<meta name="theme-color" content="#4a3226" />
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+<meta property="og:title" content="暦しるべ｜日本の吉日・凶日がひと目で分かる暦カレンダー" />
+<meta property="og:description" content="天赦日・一粒万倍日・大安・不成就日など、主要な吉日・凶日20種を月間カレンダーで確認。目的別の吉日検索もできる無料Webサービスです。" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ja_JP" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --page: #faf1e2;
+  --shell: #eadfcb;
+  --card: #ffffff;
+  --ink: #3b3330;
+  --ink-soft: #6e625c;
+  --line: #e8dfd2;
+  --accent: #e1467c;
+  --accent-text: #c4306a;
+  --good-bg: #ffeca8;
+  --good-bg-soft: #fff6d9;
+  --good-ink: #7a5200;
+  --caution-bg: #e4e9f2;
+  --caution-bg-soft: #f1f4f9;
+  --caution-ink: #3f5570;
+  --header-bg: #4a3226;
+  --header-bg-deep: #2a1a12;
+  --header-ink: #f7e9cd;
+  --header-ink-soft: #d9c19b;
+  --frame-bg: #e7d7b7;
+  --frame-edge: #8a6f47;
+  --frame-high: #fffdf7;
+  --frame-low: #c8b391;
+  --tier-gold: #efd47a;
+  --tier-gold-ink: #645319;
+  --best: #c4322c;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --font-round: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+  --font-body: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--shell);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--font-round); line-height: 1.4; }
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--header-bg) 96%, transparent);
+  color: var(--header-ink);
+  box-shadow: 0 2px 12px rgba(42, 26, 18, .25);
+}
+.site-header .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 64px; gap: 16px;
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-round); font-weight: 900; font-size: 1.25rem; letter-spacing: .04em; }
+.brand img { width: 40px; height: 40px; }
+.gnav { display: flex; align-items: center; gap: 22px; font-size: .92rem; }
+.gnav a { text-decoration: none; color: var(--header-ink-soft); transition: color .2s; }
+.gnav a:hover { color: var(--header-ink); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--font-round); font-weight: 700; text-decoration: none;
+  border-radius: 999px; transition: transform .15s, box-shadow .15s, background .2s;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  padding: 12px 28px; font-size: 1rem;
+  box-shadow: 0 4px 14px rgba(225, 70, 124, .38);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(225, 70, 124, .45); background: var(--accent-text); }
+.btn-header { background: var(--accent); color: #fff; padding: 8px 20px; font-size: .9rem; box-shadow: 0 3px 10px rgba(0,0,0,.25); }
+.btn-header:hover { background: var(--accent-text); }
+.btn-ghost {
+  background: var(--card); color: var(--ink);
+  border: 1px solid var(--line); padding: 12px 28px; font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(59, 51, 48, .08);
+}
+.btn-ghost:hover { transform: translateY(-2px); background: var(--good-bg-soft); }
+
+/* ---------- hero ---------- */
+.hero {
+  background:
+    radial-gradient(1200px 500px at 80% -10%, rgba(255, 236, 168, .55), transparent 60%),
+    linear-gradient(180deg, var(--header-bg) 0%, var(--header-bg-deep) 100%);
+  color: var(--header-ink);
+  overflow: hidden;
+  position: relative;
+}
+.hero::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 80px;
+  background: linear-gradient(to top right, var(--page) 49.5%, transparent 50%);
+}
+.hero .wrap {
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px;
+  align-items: center; padding-top: 72px; padding-bottom: 130px;
+}
+.hero .wrap > * { min-width: 0; }
+.hero-badge {
+  display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .08em;
+  color: var(--header-bg-deep); background: var(--tier-gold);
+  border-radius: 999px; padding: 4px 14px; margin-bottom: 18px;
+}
+.hero-kicker {
+  font-family: var(--font-round); font-weight: 700; letter-spacing: .12em;
+  color: var(--header-ink-soft); margin-bottom: 8px; font-size: .95rem;
+}
+.hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.7rem); font-weight: 900; letter-spacing: .03em;
+  margin-bottom: 18px;
+}
+.hero h1 .accent { color: var(--tier-gold); }
+.hero p.lead { color: var(--header-ink-soft); font-size: 1.02rem; margin-bottom: 30px; max-width: 34em; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.hero-note { font-size: .8rem; color: var(--header-ink-soft); margin-top: 14px; }
+
+/* hero calendar mock */
+.mock-frame {
+  background: linear-gradient(160deg, var(--frame-high), var(--frame-bg) 45%, var(--frame-low));
+  border: 1px solid var(--frame-edge);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .4);
+  transform: rotate(1.2deg);
+}
+.mock-inner { background: var(--page); border-radius: 16px; padding: 18px; }
+.mock-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; font-family: var(--font-round); }
+.mock-head .num { font-size: 2.2rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.mock-head .unit { font-weight: 700; color: var(--accent); }
+.mock-head .en { margin-left: auto; font-size: .75rem; color: var(--ink-soft); }
+.mock-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.mock-grid > * { min-width: 0; overflow: hidden; }
+.mock-grid .dow { font-size: .6rem; text-align: center; color: var(--ink-soft); padding: 2px 0; }
+.mock-grid .dow.sun { color: #9e0b0b; }
+.mock-grid .dow.sat { color: #1e40af; }
+.mock-cell {
+  background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+  min-height: 46px; padding: 3px 4px; font-size: .68rem; line-height: 1.3;
+}
+.mock-cell .d { font-weight: 700; }
+.mock-cell .tag {
+  display: block; font-size: .52rem; font-weight: 700; border-radius: 4px;
+  padding: 0 3px; margin-top: 2px; white-space: nowrap; overflow: hidden;
+}
+.tag-good { background: var(--good-bg); color: var(--good-ink); }
+.tag-best { background: var(--best); color: #fff; }
+.tag-bad { background: var(--caution-bg); color: var(--caution-ink); }
+.mock-cell.today { background: var(--good-bg); border-color: var(--tier-gold-ink); }
+.mock-cell.dim { opacity: .35; }
+
+/* ---------- sections ---------- */
+section { padding: 84px 0; }
+.sec-page { background: var(--page); }
+.sec-shell { background: var(--shell); }
+.sec-label {
+  text-align: center; font-family: var(--font-round); font-weight: 700;
+  color: var(--accent-text); letter-spacing: .18em; font-size: .85rem; margin-bottom: 10px;
+}
+.sec-title { text-align: center; font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 900; margin-bottom: 16px; letter-spacing: .04em; }
+.sec-desc { text-align: center; color: var(--ink-soft); max-width: 40em; margin: 0 auto 48px; }
+
+/* worries */
+.worry-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+.worry {
+  background: var(--card); border-radius: var(--radius-md); border: 1px solid var(--line);
+  padding: 24px 20px; text-align: center; box-shadow: 0 4px 14px rgba(59, 51, 48, .06);
+}
+.worry .emoji { font-size: 2rem; margin-bottom: 10px; }
+.worry p { font-weight: 700; font-family: var(--font-round); }
+.worry small { display: block; margin-top: 6px; color: var(--ink-soft); font-weight: 400; }
+.worry-arrow { text-align: center; margin: 40px 0 8px; font-size: 2rem; color: var(--accent); }
+.worry-answer { text-align: center; font-family: var(--font-round); font-size: clamp(1.2rem, 2.6vw, 1.6rem); font-weight: 900; }
+.worry-answer .marker { background: linear-gradient(transparent 62%, var(--good-bg) 62%); padding: 0 2px; }
+
+/* features */
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; }
+.feature {
+  background: var(--card); border-radius: var(--radius-md); border: 1px solid var(--line);
+  padding: 30px 24px; box-shadow: 0 6px 18px rgba(59, 51, 48, .07);
+  transition: transform .2s;
+}
+.feature:hover { transform: translateY(-4px); }
+.feature .icon {
+  width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.7rem; background: var(--good-bg-soft); border: 1px solid var(--line); margin-bottom: 16px;
+}
+.feature h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 10px; }
+.feature p { font-size: .92rem; color: var(--ink-soft); }
+
+/* koyomi encyclopedia */
+.koyomi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.koyomi-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: 20px 22px; box-shadow: 0 4px 12px rgba(59, 51, 48, .05);
+}
+.koyomi-card .chip {
+  display: inline-block; font-family: var(--font-round); font-weight: 700; font-size: .95rem;
+  border-radius: 8px; padding: 3px 12px; margin-bottom: 10px;
+}
+.chip-good { background: var(--good-bg); color: var(--good-ink); }
+.chip-best { background: var(--best); color: #fff; }
+.chip-bad { background: var(--caution-bg); color: var(--caution-ink); }
+.koyomi-card p { font-size: .9rem; color: var(--ink-soft); }
+.koyomi-more { text-align: center; margin-top: 34px; color: var(--ink-soft); font-size: .92rem; }
+
+/* steps */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; counter-reset: step; }
+.step {
+  position: relative; background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius-md); padding: 38px 24px 28px; box-shadow: 0 6px 18px rgba(59, 51, 48, .07);
+}
+.step::before {
+  counter-increment: step; content: counter(step, decimal-leading-zero);
+  position: absolute; top: -18px; left: 22px;
+  font-family: var(--font-round); font-weight: 900; font-size: 1rem;
+  background: var(--accent); color: #fff; border-radius: 999px; padding: 4px 16px;
+  box-shadow: 0 4px 10px rgba(225, 70, 124, .35);
+}
+.step h3 { font-size: 1.05rem; font-weight: 900; margin-bottom: 8px; }
+.step p { font-size: .9rem; color: var(--ink-soft); }
+
+/* purposes */
+.purpose-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
+.purpose-chips span {
+  font-family: var(--font-round); font-weight: 700; font-size: .9rem;
+  background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 8px 18px;
+  box-shadow: 0 2px 6px rgba(59, 51, 48, .06);
+}
+
+/* faq */
+.faq { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+.faq details {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: 4px 24px; box-shadow: 0 3px 10px rgba(59, 51, 48, .05);
+}
+.faq summary {
+  cursor: pointer; list-style: none; display: flex; align-items: center; gap: 14px;
+  font-family: var(--font-round); font-weight: 700; padding: 16px 0;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before { content: "Q"; flex-shrink: 0; color: var(--accent-text); font-weight: 900; font-size: 1.1rem; }
+.faq summary::after { content: "＋"; margin-left: auto; color: var(--ink-soft); transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq .a { display: flex; gap: 14px; padding: 0 0 18px; color: var(--ink-soft); font-size: .93rem; }
+.faq .a::before { content: "A"; flex-shrink: 0; color: var(--good-ink); font-weight: 900; font-family: var(--font-round); font-size: 1.1rem; line-height: 1.6; }
+
+/* cta */
+.cta {
+  background:
+    radial-gradient(900px 400px at 20% 110%, rgba(255, 236, 168, .28), transparent 60%),
+    linear-gradient(180deg, var(--header-bg) 0%, var(--header-bg-deep) 100%);
+  color: var(--header-ink); text-align: center;
+}
+.cta h2 { font-size: clamp(1.5rem, 3.2vw, 2.2rem); font-weight: 900; margin-bottom: 14px; letter-spacing: .04em; }
+.cta p { color: var(--header-ink-soft); margin-bottom: 32px; }
+.cta .btn-primary { font-size: 1.1rem; padding: 16px 44px; }
+
+/* footer */
+footer { background: var(--header-bg-deep); color: var(--header-ink-soft); padding: 36px 0; font-size: .85rem; }
+footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+footer .brand { font-size: 1rem; }
+footer .brand img { width: 30px; height: 30px; }
+footer nav { display: flex; gap: 18px; }
+footer nav a { text-decoration: none; }
+footer nav a:hover { color: var(--header-ink); }
+
+/* reveal animation */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.on { opacity: 1; transform: none; }
+
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; padding-top: 48px; padding-bottom: 110px; gap: 36px; }
+  .mock-frame { transform: none; max-width: 440px; margin: 0 auto; }
+  .gnav .nav-link { display: none; }
+  section { padding: 64px 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="assets/logo-mark.png" alt="" width="40" height="40" />
+      暦しるべ
+    </a>
+    <nav class="gnav" aria-label="サイト内メニュー">
+      <a class="nav-link" href="#features">特徴</a>
+      <a class="nav-link" href="#koyomi">吉日いろいろ</a>
+      <a class="nav-link" href="#howto">使い方</a>
+      <a class="nav-link" href="#faq">よくある質問</a>
+      <a class="btn btn-header" href="https://koyomi-calendar.ohtaka-84d.workers.dev/" target="_blank" rel="noopener">カレンダーを見る</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <span class="hero-badge">登録不要・無料で使える暦カレンダー</span>
+        <p class="hero-kicker">今日を知る、暦を楽しむ。</p>
+        <h1>
+          <span class="accent">吉日・凶日20種</span>が<br />
+          ひと目で分かる、<br />
+          日本の暦カレンダー。
+        </h1>
+        <p class="lead">
+          天赦日・一粒万倍日・大安・不成就日……。日本に古くから伝わる暦の吉日・凶日を、月間カレンダーで分かりやすくお届けします。入籍や財布の新調、開業など、大切な日取り選びの道しるべに。
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://koyomi-calendar.ohtaka-84d.workers.dev/" target="_blank" rel="noopener">無料でカレンダーを見る</a>
+          <a class="btn btn-ghost" href="#features">サービスの特徴を見る</a>
+        </div>
+        <p class="hero-note">アプリのインストール不要。スマホ・PCのブラウザですぐ使えます。</p>
+      </div>
+
+      <div class="mock-frame" aria-hidden="true">
+        <div class="mock-inner">
+          <div class="mock-head">
+            <span class="num">8</span><span class="unit">月</span>
+            <span class="en">August 2026</span>
+          </div>
+          <div class="mock-grid">
+            <div class="dow sun">日</div><div class="dow">月</div><div class="dow">火</div><div class="dow">水</div><div class="dow">木</div><div class="dow">金</div><div class="dow sat">土</div>
+            <div class="mock-cell dim"><span class="d">26</span></div>
+            <div class="mock-cell dim"><span class="d">27</span></div>
+            <div class="mock-cell dim"><span class="d">28</span></div>
+            <div class="mock-cell dim"><span class="d">29</span></div>
+            <div class="mock-cell dim"><span class="d">30</span></div>
+            <div class="mock-cell dim"><span class="d">31</span></div>
+            <div class="mock-cell"><span class="d">1</span><span class="tag tag-good">大安</span></div>
+            <div class="mock-cell"><span class="d">2</span></div>
+            <div class="mock-cell today"><span class="d">3</span><span class="tag tag-good">一粒万倍日</span></div>
+            <div class="mock-cell"><span class="d">4</span></div>
+            <div class="mock-cell"><span class="d">5</span><span class="tag tag-bad">不成就日</span></div>
+            <div class="mock-cell"><span class="d">6</span></div>
+            <div class="mock-cell"><span class="d">7</span><span class="tag tag-good">大安</span></div>
+            <div class="mock-cell"><span class="d">8</span></div>
+            <div class="mock-cell"><span class="d">9</span></div>
+            <div class="mock-cell"><span class="d">10</span><span class="tag tag-good">寅の日</span></div>
+            <div class="mock-cell"><span class="d">11</span></div>
+            <div class="mock-cell"><span class="d">12</span></div>
+            <div class="mock-cell"><span class="d">13</span><span class="tag tag-good">一粒万倍日</span></div>
+            <div class="mock-cell"><span class="d">14</span></div>
+            <div class="mock-cell"><span class="d">15</span></div>
+            <div class="mock-cell"><span class="d">16</span></div>
+            <div class="mock-cell"><span class="d">17</span></div>
+            <div class="mock-cell"><span class="d">18</span><span class="tag tag-good">甲子の日</span></div>
+            <div class="mock-cell"><span class="d">19</span><span class="tag tag-bad">仏滅</span></div>
+            <div class="mock-cell"><span class="d">20</span></div>
+            <div class="mock-cell"><span class="d">21</span></div>
+            <div class="mock-cell"><span class="d">22</span></div>
+            <div class="mock-cell"><span class="d">23</span><span class="tag tag-best">己巳の日</span></div>
+            <div class="mock-cell"><span class="d">24</span></div>
+            <div class="mock-cell"><span class="d">25</span><span class="tag tag-good">一粒万倍日</span></div>
+            <div class="mock-cell"><span class="d">26</span></div>
+            <div class="mock-cell"><span class="d">27</span></div>
+            <div class="mock-cell"><span class="d">28</span></div>
+            <div class="mock-cell"><span class="d">29</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- worries -->
+  <section class="sec-page" id="worries">
+    <div class="wrap">
+      <p class="sec-label">SCENE</p>
+      <h2 class="sec-title">こんなとき、ありませんか？</h2>
+      <div class="worry-list reveal">
+        <div class="worry">
+          <div class="emoji">💍</div>
+          <p>入籍日・結婚式の<br />日取りを決めたい</p>
+          <small>ふたりの記念日は縁起のいい日に</small>
+        </div>
+        <div class="worry">
+          <div class="emoji">👛</div>
+          <p>財布の新調・使い始めに<br />いい日を知りたい</p>
+          <small>金運アップの日を選びたい</small>
+        </div>
+        <div class="worry">
+          <div class="emoji">🖋️</div>
+          <p>開業・契約ごとを<br />縁起のいい日にしたい</p>
+          <small>大事なスタートは験を担ぎたい</small>
+        </div>
+        <div class="worry">
+          <div class="emoji">🚚</div>
+          <p>引越しや納車の日を<br />選びたい</p>
+          <small>避けたほうがいい日も気になる</small>
+        </div>
+      </div>
+      <div class="worry-arrow" aria-hidden="true">▼</div>
+      <p class="worry-answer reveal">
+        そんなときは、<span class="marker">暦しるべ</span>を開くだけ。<br />
+        カレンダーを見れば、<span class="marker">今日がどんな日か</span>すぐ分かります。
+      </p>
+    </div>
+  </section>
+
+  <!-- features -->
+  <section class="sec-shell" id="features">
+    <div class="wrap">
+      <p class="sec-label">FEATURES</p>
+      <h2 class="sec-title">暦しるべの特徴</h2>
+      <p class="sec-desc">難しい暦の知識がなくても大丈夫。毎日をちょっと特別にする工夫を詰め込みました。</p>
+      <div class="feature-grid reveal">
+        <div class="feature">
+          <div class="icon">📅</div>
+          <h3>吉日・凶日20種を網羅</h3>
+          <p>天赦日・一粒万倍日・大安・寅の日・巳の日から、不成就日・受死日などの凶日まで。日本の主要な暦注20種をまとめて確認できます。</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🗓️</div>
+          <h3>月間カレンダーでひと目</h3>
+          <p>その月の吉日・凶日をカレンダー上にマーク表示。「最強開運日」「大吉日」などのランクで、良い日が直感的に分かります。</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🔍</div>
+          <h3>目的別に吉日を検索</h3>
+          <p>「結婚・入籍」「金運・財布」「引越し」など目的を選ぶだけで、これから訪れるおすすめの吉日を一覧でご提案。避けたい日も調べられます。</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📖</div>
+          <h3>日別の詳細解説つき</h3>
+          <p>気になる日をタップすると、その日に重なる暦注の意味やアドバイスを詳しく解説。暦の知識も自然と身につきます。</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📱</div>
+          <h3>スマホでもPCでも快適</h3>
+          <p>ブラウザで開くだけ、インストール不要。ホーム画面に追加すればアプリのようにサッと使えます。</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🆓</div>
+          <h3>登録不要・無料</h3>
+          <p>会員登録もアカウント作成も不要。思い立ったその日から、どなたでも無料でご利用いただけます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- koyomi encyclopedia -->
+  <section class="sec-page" id="koyomi">
+    <div class="wrap">
+      <p class="sec-label">KOYOMI</p>
+      <h2 class="sec-title">たとえば、こんな吉日・凶日が分かります</h2>
+      <p class="sec-desc">古くから受け継がれてきた暦注のなかから、代表的なものをご紹介します。</p>
+      <div class="koyomi-grid reveal">
+        <div class="koyomi-card">
+          <span class="chip chip-best">天赦日（てんしゃにち）</span>
+          <p>「天がすべての罪を赦す」とされる、暦のうえで最上の大吉日。年に数回しかない貴重な日で、何事を始めるにも良いといわれます。</p>
+        </div>
+        <div class="koyomi-card">
+          <span class="chip chip-good">一粒万倍日（いちりゅうまんばいび)</span>
+          <p>一粒の籾が万倍に実るという意味の吉日。仕事はじめ・開店・財布の新調など「増やしたいこと」のスタートにぴったりです。</p>
+        </div>
+        <div class="koyomi-card">
+          <span class="chip chip-good">大安（たいあん）</span>
+          <p>六曜のなかで最も縁起のよい日。「大いに安し」の意味で、結婚式や入籍など、お祝いごとの定番の日取りです。</p>
+        </div>
+        <div class="koyomi-card">
+          <span class="chip chip-good">寅の日（とらのひ）</span>
+          <p>「千里を行って千里を帰る」虎にあやかり、旅立ちや金運に縁起がよいとされる日。出したお金が戻ってくるといわれます。</p>
+        </div>
+        <div class="koyomi-card">
+          <span class="chip chip-good">巳の日・己巳の日（みのひ・つちのとみのひ）</span>
+          <p>金運・芸事の神さま弁財天さまのお使い、白蛇にちなむ吉日。なかでも60日に一度の己巳の日は、金運にとくに良い日とされます。</p>
+        </div>
+        <div class="koyomi-card">
+          <span class="chip chip-bad">不成就日（ふじょうじゅび）</span>
+          <p>何事も成就しにくいとされる凶日。吉日と重なると効果が薄れるともいわれ、大事なスタートは避けるのが安心です。</p>
+        </div>
+      </div>
+      <p class="koyomi-more">ほかにも 甲子の日・天恩日・大明日・母倉日・神吉日・受死日 など、全20種の暦注に対応しています。</p>
+    </div>
+  </section>
+
+  <!-- how to -->
+  <section class="sec-shell" id="howto">
+    <div class="wrap">
+      <p class="sec-label">HOW TO USE</p>
+      <h2 class="sec-title">使い方はかんたん、3ステップ</h2>
+      <div class="steps reveal">
+        <div class="step">
+          <h3>カレンダーを開く</h3>
+          <p>スマホやPCのブラウザで「暦しるべ」を開くだけ。今月のカレンダーに吉日・凶日がマークされています。</p>
+        </div>
+        <div class="step">
+          <h3>気になる日をタップ</h3>
+          <p>日付を選ぶと、その日に重なる暦注の意味やランク、過ごし方のヒントを詳しく確認できます。</p>
+        </div>
+        <div class="step">
+          <h3>目的から吉日を探す</h3>
+          <p>「吉日を探す」ボタンで目的を選べば、これから訪れるおすすめの日を一覧でご案内します。</p>
+        </div>
+      </div>
+      <div class="purpose-chips reveal" aria-label="選べる目的の例">
+        <span>💼 仕事・契約</span>
+        <span>👛 金運・財布</span>
+        <span>💍 結婚・入籍</span>
+        <span>🚚 引越し</span>
+        <span>✈️ 旅行</span>
+        <span>🏠 建築・修繕</span>
+        <span>⛩️ 参拝</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- faq -->
+  <section class="sec-page" id="faq">
+    <div class="wrap">
+      <p class="sec-label">FAQ</p>
+      <h2 class="sec-title">よくある質問</h2>
+      <div class="faq reveal">
+        <details>
+          <summary>利用は無料ですか？</summary>
+          <p class="a">はい、すべての機能を無料でご利用いただけます。会員登録やアカウント作成も不要です。</p>
+        </details>
+        <details>
+          <summary>アプリのインストールは必要ですか？</summary>
+          <p class="a">不要です。スマホ・PCのブラウザからそのままご利用いただけます。スマホではホーム画面に追加すると、アプリのようにワンタップで開けて便利です。</p>
+        </details>
+        <details>
+          <summary>どんな吉日・凶日が確認できますか？</summary>
+          <p class="a">天赦日・一粒万倍日・大安・寅の日・巳の日・甲子の日などの吉日から、不成就日・仏滅・受死日などの凶日まで、日本の主要な暦注20種に対応しています。</p>
+        </details>
+        <details>
+          <summary>過去や未来の月も見られますか？</summary>
+          <p class="a">はい、月を切り替えて先々の吉日を確認できます。「吉日を探す」機能では、目的に合ったこれからの吉日を一覧で探すこともできます。</p>
+        </details>
+        <details>
+          <summary>吉日はどうやって選べばいいですか？</summary>
+          <p class="a">目的に合わせて選ぶのがおすすめです。金運なら一粒万倍日や巳の日、お祝いごとなら大安、何かを始めるなら天赦日など。迷ったら「吉日を探す」から目的を選ぶだけで、暦しるべがご提案します。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section class="cta">
+    <div class="wrap">
+      <h2>何気ない一日を、ちょっと特別に。</h2>
+      <p>今日はどんな日？ まずはカレンダーをのぞいてみてください。</p>
+      <a class="btn btn-primary" href="https://koyomi-calendar.ohtaka-84d.workers.dev/" target="_blank" rel="noopener">無料でカレンダーを見る</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="assets/logo-mark.png" alt="" width="30" height="30" />
+      暦しるべ
+    </a>
+    <nav aria-label="フッターメニュー">
+      <a href="#features">特徴</a>
+      <a href="#koyomi">吉日いろいろ</a>
+      <a href="#howto">使い方</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <small>&copy; 2026 暦しるべ</small>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>
