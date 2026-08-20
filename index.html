@@ -16,6 +16,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<!-- Google Analytics (GA4)
+     GA_MEASUREMENT_ID を実際の測定ID（G-XXXXXXXXXX）に書き換えると計測が始まります。
+     プレースホルダーのままの間はタグを読み込みません。 -->
+<script>
+(() => {
+  const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+  if (!/^G-[A-Z0-9]{6,}$/.test(GA_MEASUREMENT_ID) || GA_MEASUREMENT_ID.includes("XXXX")) return;
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag("js", new Date());
+  gtag("config", GA_MEASUREMENT_ID, { anonymize_ip: true });
+})();
+</script>
 <style>
 :root {
   --page: #faf1e2;
