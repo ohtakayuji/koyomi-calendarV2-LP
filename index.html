@@ -327,6 +327,39 @@ footer nav a:hover { color: var(--header-ink); }
   .gnav .nav-link { display: none; }
   section { padding: 64px 0; }
 }
+
+@media (max-width: 520px) {
+  .wrap { padding: 0 16px; }
+  body { line-height: 1.75; }
+  section { padding: 52px 0; }
+  .site-header .wrap { min-height: 56px; }
+  .brand { font-size: 1.1rem; }
+  .brand img { width: 34px; height: 34px; }
+  .btn-header { padding: 8px 16px; font-size: .85rem; }
+  .hero .wrap { padding-top: 36px; padding-bottom: 92px; gap: 28px; }
+  .hero p.lead { font-size: .95rem; }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; padding: 15px 20px; }
+  .hero::after { height: 48px; }
+  .mock-frame { padding: 8px; }
+  .mock-inner { padding: 12px; }
+  .worry-list { gap: 12px; }
+  .worry { padding: 20px 16px; }
+  .feature-grid, .koyomi-grid, .steps { gap: 14px; }
+  .feature { padding: 24px 20px; }
+  .koyomi-card { padding: 18px; }
+  .steps { margin-top: 8px; row-gap: 30px; }
+  .sec-desc { margin-bottom: 36px; }
+  .purpose-chips span { font-size: .82rem; padding: 7px 14px; }
+  .faq details { padding: 2px 18px; }
+  .faq summary { padding: 14px 0; gap: 10px; }
+  .faq .a { gap: 10px; }
+  .cta .btn-primary { width: 100%; max-width: 340px; }
+  footer { padding: 30px 0 calc(30px + env(safe-area-inset-bottom)); }
+  footer .wrap { flex-direction: column; text-align: center; justify-content: center; }
+  footer nav { flex-wrap: wrap; justify-content: center; gap: 12px 18px; }
+  footer nav a { padding: 4px 0; }
+}
 </style>
 </head>
 <body>
