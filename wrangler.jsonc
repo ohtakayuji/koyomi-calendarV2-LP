@@ -1,0 +1,8 @@
+// Cloudflare Workers(静的アセット)としてLPを配信する設定
+{
+  "name": "koyomi-calendarv2-lp",
+  "compatibility_date": "2026-08-20",
+  "assets": {
+    "directory": "./_site"
+  }
+}
