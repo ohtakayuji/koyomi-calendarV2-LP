@@ -2,7 +2,7 @@
 
 日本の吉日・凶日カレンダー「暦しるべ」のランディングページ（LP）です。
 
-- 本体サービス: https://koyomi-calendar.ohtaka-84d.workers.dev/
+- 本体サービス: https://koyomi-shirube.pages.dev/
 
 ## 構成
 
